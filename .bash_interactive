@@ -1,0 +1,31 @@
+# -*- Shell-Script -*-
+
+export PS1='$ ';
+export PS3='? ';
+
+set -o ignoreeof
+shopt -s cdspell
+
+function +()  { pushd "$@"; }
+function -()  { popd "$@"; }
+function =()  { dirs -v "$@"; }
+function j()  { jobs "$@"; }
+function k()  { kill -9 "$@"; }
+function l()  { ls -l "$@"; }
+
+# function withX() { 
+#   cygstart --hide /bin/xinit & 
+#   sleep 5;
+#   exit; 
+# }
+
+[ -x /bin/uname ] && {
+    case $(/bin/uname -o) in
+    Msys)
+	. $HOME/.bash_Msys
+	;;
+    esac
+}
+
+##end .bash_interactive
+# vim: filetype=sh :

@@ -1,0 +1,11 @@
+[user]
+	name = Cesar A. Quiroz, Ph.D.
+	email = cesar_quiroz@ieee.org
+[color]
+	status = never
+[diff]
+	tool = gvimdiff
+[merge]
+	tool = tortoisegitmerge
+[core]
+	autocrlf = false

@@ -1,0 +1,14 @@
+: -*- Shell-Script -*-
+
+function e()		{ gvim		"$@"& }
+function gview()	{ gvim -R	"$@"& }
+function gviewdiff()	{ gvim -Rd	"$@"& }
+function gvimdiff	{ gvim -d	"$@"& }
+function view()		{ vim  -R	"$@"; }
+function viewdiff()	{ vim  -Rd	"$@"; }
+function vimdiff()	{ vim  -d	"$@"; }
+
+alias gp='gvim -RM -&'
+
+# vim: set filetype=sh :
+##end .bash_Msys

@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='c:/MinGW/share/doc/tcl/8.6.0/tools'
+let g:netrw_dirhist_2='c:/MinGW/share/doc/tcl/8.6.0'
+let g:netrw_dirhist_3='c:/MinGW/share/doc/tcl/8.6.0/unix'
+let g:netrw_dirhist_4='c:/MinGW/share/doc/tcl/8.6.0/unix/dltest'
+let g:netrw_dirhist_5='c:/MinGW/share/doc/tcl/8.6.0/unix'
+let g:netrw_dirhist_6='c:/MinGW/share/doc/tcl/8.6.0'
+let g:netrw_dirhist_7='c:/Users/cesar/home/src/ctags-5.8'
+let g:netrw_dirhist_8='c:\Users\cesar\home\src\ctags-5.8'
+let g:netrw_dirhist_9='c:/Users/cesar/home/src/ctags-5.8/gnu_regex'

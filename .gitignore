@@ -1,0 +1,16 @@
+\#*
+*~
+cscope.*
+tags
+TAGS
+GPATH
+GTAGS
+GRTAGS
+GSYMS
+ID
+*.a
+*.la
+*.o
+*.ko
+*.so
+*.stackdump

@@ -1,0 +1,48 @@
+# -*- Shell-Script -*-
+
+export PATH="\
+$HOME/cmd\
+:$HOME/bin\
+:/c/Program Files (x86)/Vim/vim74\
+:/c/MinGW/bin\
+:/c/MinGW/mingw32/bin\
+:/c/MinGW/msys/1.0/bin\
+:/c/Program Files (x86)/Git/bin\
+:/c/Windows/system32\
+:/c/Windows\
+:/c/Windows/System32/Wbem\
+:/c/Windows/System32/WindowsPowerShell/v1.0/\
+:/c/Program Files/TortoiseGit/bin\
+:/c/Program Files/TortoiseSVN/bin\
+:/c/Program Files (x86)/WinMerge\
+:.\
+"
+
+export MANPATH="\
+$HOME/share/man\
+:/c/MinGw/msys/1.0/share/man\
+:/c/MinGw/share/doc/mingwrt/historical/man\
+:/c/MinGw/share/doc/w32api/historical/man\
+:/c/MinGw/share/man\
+"
+
+export INFOPATH="\
+$HOME/info\
+:/c/MinGW/msys/1.0/share/info\
+:/c/MinGW/share/info\
+"
+
+PERL5LIB=$HOME/lib/perl5
+export PERL5LIB
+
+export CVSROOT=:local:$HOME/src/cvsroot
+
+export PAGER=less
+export LESS=cq
+export EDITOR=vim
+export VISUAL=gvim
+
+# export TZ=:America/Los_Angeles
+
+##end .bash_env
+# vim: set filetype=sh :

@@ -1,0 +1,9 @@
+# -*- Shell-Script -*-
+
+export EDITOR=$HOME/cmd/e
+export VISUAL=$HOME/cmd/e
+export PAGER=
+export MANPAGER=
+
+##end .bash_under_emacs
+# vim: set filetype=sh :
