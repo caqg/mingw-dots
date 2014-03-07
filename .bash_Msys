@@ -1,12 +1,14 @@
 : -*- Shell-Script -*-
 
-function e()		{ gvim		"$@"& }
-function gview()	{ gvim -R	"$@"& }
-function gviewdiff()	{ gvim -Rd	"$@"& }
-function gvimdiff	{ gvim -d	"$@"& }
-function view()		{ vim  -R	"$@"; }
-function viewdiff()	{ vim  -Rd	"$@"; }
-function vimdiff()	{ vim  -d	"$@"; }
+function e()          { gvim -p   "$@"& }
+function gview()      { gvim -Rp  "$@"& }
+function gviewdiff()  { gvim -Rd  "$@"& }
+function gvimdiff     { gvim -d   "$@"& }
+function view()       { vim  -Rp  "$@"; }
+function viewdiff()   { vim  -Rd  "$@"; }
+function vimdiff()    { vim  -d   "$@"; }
+
+function m()          { make "$@" 2>&1 | tee make.info; }
 
 alias gp='gvim -RM -&'
 

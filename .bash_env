@@ -27,7 +27,7 @@ $HOME/share/man\
 "
 
 export INFOPATH="\
-$HOME/info\
+$HOME/share/info\
 :/c/MinGW/msys/1.0/share/info\
 :/c/MinGW/share/info\
 "

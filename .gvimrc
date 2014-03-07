@@ -14,7 +14,7 @@ if &diff
   set lines=999
 else
   set columns=96
-  set lines=36
+  set lines=40
 endif
 
 color solarized

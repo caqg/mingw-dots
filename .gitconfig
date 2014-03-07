@@ -3,6 +3,8 @@
 	email = cesar_quiroz@ieee.org
 [color]
 	status = never
+	diff = never
+	branch = never
 [diff]
 	tool = gvimdiff
 [merge]
