@@ -1,0 +1,6 @@
+--extra=+f
+--fields=+ailmnSz
+--if0=no
+--c-kinds=+lpx
+--c++-kinds=+lpx
+--java-kinds=+l

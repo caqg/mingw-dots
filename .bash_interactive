@@ -11,7 +11,7 @@ function -()  { popd "$@"; }
 function =()  { dirs -v "$@"; }
 function j()  { jobs "$@"; }
 function k()  { kill -9 "$@"; }
-function l()  { ls -l "$@"; }
+function l()  { ls -lhrt "$@"; }
 
 # function withX() { 
 #   cygstart --hide /bin/xinit & 

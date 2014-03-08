@@ -3,6 +3,7 @@
 set autoindent
 set autowrite
 set shiftwidth=4
+set wrapmargin=4
 set shell=bash
 set nowrap
 

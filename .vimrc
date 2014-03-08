@@ -1,13 +1,15 @@
 " vim Initialization
 
 set directory=.,$TMPDIR,$TMP,$TEMP
+set tags=./tags,tags,/mingw/tags
 
 set lines=36
-set columns=82
+set columns=80
 
 source $HOME\.exrc
 set smarttab
 set expandtab
+set textwidth=76
 syntax on
 filetype indent on
 filetype plugin on
