@@ -1,0 +1,38 @@
+#!/bin/bash
+
+case $# in
+0)
+    SEP='\n';;
+*)
+    SEP=',';;
+esac
+
+{
+    cpp -v -xc++ </dev/null 2>&1;
+    cpp -v -xc   </dev/null 2>&1;
+    echo ' /mingw/msys/1.0/include';
+} |
+grep '^ ' | grep -v cc1.exe |
+sed -e 's_\\_/_g'  -e 's_\([a-z]\):_/\1_' |
+while read d; do
+    [ -d "$d" ] && ( cd "$d"; pwd; )
+done |
+sed 's-^/c/-/-' |
+awk '
+{
+    d=$1
+    if (!(d in dir)) {
+        ++i;
+        dir[d] = 1;
+        out[i] = d;
+        # printf "#%d \"%s\"\n", i, out[i];
+    }
+}
+END {
+    # printf "i=%d\n", i;
+    for (j = 1; j <= i; ++j) {
+        printf "%s%s", out[j], "'"$SEP"'";
+    }
+}
+'
+

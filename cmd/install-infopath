@@ -1,0 +1,16 @@
+#!/bin/bash
+
+target=$HOME/share/info/DIR
+rm "$target"
+
+nullglob=$(shopt -p nullglob)
+shopt -s nullglob
+for d in $(fmt.path $INFOPATH); do
+    echo processing ${d}
+    for info in ${d}/*.info; do
+	install-info ${info} ${target}
+    done
+done
+eval $nullglob
+
+# vim: set filetype=sh :

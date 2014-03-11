@@ -18,5 +18,6 @@ else
 endif
 
 color solarized
+set background=dark
 call togglebg#map("<F12>")
 "end .gvimrc

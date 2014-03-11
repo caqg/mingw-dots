@@ -2,6 +2,7 @@
 
 set directory=.,$TMPDIR,$TMP,$TEMP
 set tags=./tags,tags,/mingw/tags
+set path=.,,/mingw/lib/gcc/mingw32/4.8.1/include/c++,/mingw/lib/gcc/mingw32/4.8.1/include/c++/mingw32,/mingw/lib/gcc/mingw32/4.8.1/include/c++/backward,/mingw/lib/gcc/mingw32/4.8.1/include,/mingw/include,/mingw/lib/gcc/mingw32/4.8.1/include-fixed,/mingw/mingw32/include,/mingw/msys/1.0/include
 
 set lines=36
 set columns=80
@@ -32,7 +33,6 @@ autocmd FileType c,cpp,java :set cinoptions=:0,j1,J1,l0,g0,t0,(0,)30,N-s
 autocmd FileType c,cpp,java :set foldmethod=syntax
 autocmd FileType c,cpp,java :set foldcolumn=4
 autocmd FileType c,cpp,java :set nofoldenable
-autocmd FileType c,cpp,java :set columns=85
 
 set ruler
 set diffopt=filler,iwhite

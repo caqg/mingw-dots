@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# inspired by /usr/share/xemacs*/etc/editclient.sh
+# updated for Emacs 23
+
+emacsclient -c ${1+"$@"} >/dev/null 2>&1 || {
+    emacs --daemon
+    until emacsclient -batch -eval t >/dev/null 2>&1; do
+	sleep 1
+    done
+
+    exec emacsclient -c ${1+"$@"}
+}
