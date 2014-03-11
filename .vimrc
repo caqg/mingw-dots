@@ -2,7 +2,16 @@
 
 set directory=.,$TMPDIR,$TMP,$TEMP
 set tags=./tags,tags,/mingw/tags
-set path=.,,/mingw/lib/gcc/mingw32/4.8.1/include/c++,/mingw/lib/gcc/mingw32/4.8.1/include/c++/mingw32,/mingw/lib/gcc/mingw32/4.8.1/include/c++/backward,/mingw/lib/gcc/mingw32/4.8.1/include,/mingw/include,/mingw/lib/gcc/mingw32/4.8.1/include-fixed,/mingw/mingw32/include,/mingw/msys/1.0/include
+
+set path=.,,
+set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++
+set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++/mingw32
+set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++/backward
+set path+=/mingw/lib/gcc/mingw32/4.8.1/include
+set path+=/mingw/include
+set path+=/mingw/lib/gcc/mingw32/4.8.1/include-fixed
+set path+=/mingw/mingw32/include
+set path+=/mingw/msys/1.0/include
 
 set lines=36
 set columns=80
