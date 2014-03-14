@@ -1,14 +1,16 @@
 #!/bin/bash
 
 target=$HOME/share/info/DIR
-rm "$target"
+rm -f "$target"
 
 nullglob=$(shopt -p nullglob)
 shopt -s nullglob
-for d in $(fmt.path $INFOPATH); do
+
+fmt.path "$INFOPATH" |
+while read d; do
     echo processing ${d}
-    for info in ${d}/*.info; do
-	install-info ${info} ${target}
+    for info in "${d}"/*.info; do
+	install-info "${info}" ${target}
     done
 done
 eval $nullglob

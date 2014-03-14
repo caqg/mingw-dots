@@ -16,7 +16,7 @@ set path+=/mingw/msys/1.0/include
 set lines=36
 set columns=80
 
-source $HOME\.exrc
+source $HOME/.exrc
 set smarttab
 set expandtab
 set textwidth=76

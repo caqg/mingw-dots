@@ -31,6 +31,7 @@ export INFOPATH="\
 $HOME/share/info\
 :/c/MinGW/msys/1.0/share/info\
 :/c/MinGW/share/info\
+:/c/Program Files (x86)/Emacs/emacs-24.3/info\
 "
 
 PERL5LIB=$HOME/lib/perl5
