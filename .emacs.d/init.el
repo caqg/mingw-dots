@@ -18,10 +18,11 @@
 Case is ignored if `case-fold-search' is non-nil in the current buffer.
 Goes backward if ARG is negative; error if CHAR not found."
            (interactive "p\ncZap to char: ")
-           (kill-region (point) (progn
-                                  (search-forward (char-to-string char) nil nil arg)
-                                  (goto-char (if (> arg 0) (1- (point)) (1+ (point))))
-                                  ))))
+           (kill-region (point)
+                        (progn
+                          (search-forward (char-to-string char) nil nil arg)
+                          (goto-char (if (> arg 0) (1- (point)) (1+ (point))))
+                          ))))
        (setq show-paren-style 'expression)
 
        ;; These are known to work in v24, but may have existed since before.
@@ -47,9 +48,10 @@ Goes backward if ARG is negative; error if CHAR not found."
 
        (require 'xcscope)
 
-       (when t                          ;working around a problem in emacs24
-         (require 'slime)
-         (slime-setup))
+       (with-demoted-errors
+         (when t                        ;working around a problem in emacs24
+           (require 'slime)
+           (slime-setup)))
 
        (require 'org-install)
        (add-to-list 'auto-mode-alist (cons "\\.org$" 'org-mode))
@@ -73,10 +75,11 @@ Goes backward if ARG is negative; error if CHAR not found."
        (require 'ede)
        (global-ede-mode t)
        (require 'semantic)
-       (setq stack-trace-on-error nil) ;obsolete variable in Emacs 24.1, needed by
-                                        ;ecb 2.40
+       (setq stack-trace-on-error nil) ;obsolete variable in Emacs 24.1,
+                                       ;needed by ecb 2.40
        (setq ecb-version-check nil)
-       (require 'ecb)
+       (with-demoted-errors
+         (require 'ecb))
        (require 'cq-x-utils)
        (require 'font-lock)
        (require 'parenface)
@@ -206,6 +209,6 @@ Goes backward if ARG is negative; error if CHAR not found."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 113 :width normal :foundry "unknown" :family "Ubuntu Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "#fdf6e3" :foreground "#657b83" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "outline" :family "Consolas"))))
  '(org-hide ((((background light)) (:foreground "gray85")))))
 (put 'scroll-left 'disabled nil)
