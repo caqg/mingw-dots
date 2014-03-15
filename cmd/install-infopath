@@ -1,6 +1,8 @@
 #!/bin/bash
 
-target=$HOME/share/info/DIR
+# target=$HOME/share/info/DIR
+targetdir="/c/Program Files (x86)/Emacs/emacs-24.3/info"
+target="${targetdir}/DIR"
 rm -f "$target"
 
 nullglob=$(shopt -p nullglob)
@@ -9,8 +11,9 @@ shopt -s nullglob
 fmt.path "$INFOPATH" |
 while read d; do
     echo processing ${d}
-    for info in "${d}"/*.info; do
-	install-info "${info}" ${target}
+    for info in "${d}"/*.info*; do
+        [ "${d}" = "$targetdir" ] || install -m 644 "$info" "$targetdir"
+	install-info "${info}" "${target}"
     done
 done
 eval $nullglob
