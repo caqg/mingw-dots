@@ -79,7 +79,7 @@ Goes backward if ARG is negative; error if CHAR not found."
        (setq stack-trace-on-error nil) ;obsolete variable in Emacs 24.1,
                                        ;needed by ecb 2.40
        (setq ecb-version-check nil)
-       (with-demoted-errors
+       (ignore-errors                   ;giving up on ECB for Msys, for now
          (require 'ecb))
        (require 'cq-x-utils)
        (require 'font-lock)
