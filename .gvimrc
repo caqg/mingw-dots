@@ -3,6 +3,7 @@
 set background=light
 set guicursor=a:block
 "set guifont=Terminal\ 14
+set guifont=Consolas:h10:cANSI
 set guioptions+=a
 set guioptions+=b
 set guioptions+=g
