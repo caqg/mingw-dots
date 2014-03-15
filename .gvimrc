@@ -8,6 +8,8 @@ set guioptions+=b
 set guioptions+=g
 set guioptions+=t
 set guioptions-=T
+set guioptions-=r
+set guioptions-=b
 
 if &diff
   set columns=180

@@ -1,0 +1,18 @@
+$ git clone https://github.com/slime/slime.git
+
+
+Get clisp for windows, put it in the Msys path, then 
+
+diff --git a/Makefile b/Makefile
+index c0973db..63bcc13 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,7 +5,8 @@
+ # Variables
+ #
+ EMACS=emacs
+-LISP=sbcl
++# LISP=sbcl
++LISP=clisp
+
+ LOAD_PATH=-L .

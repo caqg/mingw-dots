@@ -4,6 +4,7 @@
 (load-library "cl")
 (setq load-path (cons "~/.emacs.d" load-path))
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
+(setq load-path (cons "~/.emacs.d/lisp/slime" load-path))
 (setq load-path (cons "~/.emacs.d/solarized-emacs" load-path))
 
 (cond ((and (string-match "^GNU Emacs" (emacs-version))
@@ -48,7 +49,7 @@ Goes backward if ARG is negative; error if CHAR not found."
 
        (require 'xcscope)
 
-       (with-demoted-errors
+       (ignore-errors
          (when t                        ;working around a problem in emacs24
            (require 'slime)
            (slime-setup)))
@@ -153,7 +154,7 @@ Goes backward if ARG is negative; error if CHAR not found."
  '(ediff-use-toolbar-p nil)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(enable-recursive-minibuffers t)
- '(explicit-shell-file-name "bash")
+ '(explicit-shell-file-name "c:\\mingw\\msys\\1.0\\bin\\bash.exe")
  '(fill-column 78)
  '(font-lock-maximum-size nil)
  '(gdb-enable-debug t)

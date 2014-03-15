@@ -5,6 +5,8 @@ $HOME/cmd\
 :$HOME/bin\
 :/c/Program Files (x86)/Vim/vim74\
 :/c/Program Files (x86)/Emacs/emacs-24.3/bin\
+:/c/Program Files (x86)/clisp-2.49\
+:/c/Program Files/swipl/bin\
 :/c/MinGW/bin\
 :/c/MinGW/mingw32/bin\
 :/c/MinGW/msys/1.0/bin\

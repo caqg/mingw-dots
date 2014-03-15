@@ -29,7 +29,7 @@ let TE_Use_Right_Window=1
 
 " Not in plain vi
 set backup
-set laststatus=2
+set laststatus=1
 set writebackup
 set nohlsearch
 set incsearch
