@@ -13,8 +13,8 @@ set path+=/mingw/lib/gcc/mingw32/4.8.1/include-fixed
 set path+=/mingw/mingw32/include
 set path+=/mingw/msys/1.0/include
 
-set lines=36
-set columns=80
+"set lines=36
+"set columns=80
 
 source $HOME/.exrc
 set smarttab
