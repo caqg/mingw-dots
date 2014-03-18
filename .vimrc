@@ -1,7 +1,7 @@
 " vim Initialization
 
 set directory=.,$TMPDIR,$TMP,$TEMP
-set tags=./tags,tags,/mingw/tags
+set tags=./TAGS,TAGS,/MinGW/TAGS
 
 set path=.,,
 set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++

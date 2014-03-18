@@ -1,9 +1,13 @@
 #!/bin/bash
-tagsfile=./tags
+tagsfiles="\
+  ./tags\
+  ./TAGS\
+"
 
 usage() {
     echo "usage: $(basename $0)"
-    echo " builds ./tags, from the combined contents of the default include path."
+    echo " builds ./tags or ./TAGS, from the combined contents of the default include path."
+    echo " set CTAGSFLAGS=-e if you want Emacs TAGS."
 }
 
 case $# in 
@@ -11,10 +15,10 @@ case $# in
 *)      usage; exit 1;;
 esac
 
-rm -f $tagsfile
+rm -f $tagsfiles
 gccpath |
 while read d; do
     echo "Tagging $d..."
     time -p ctags $CTAGSFLAGS -aR "$d"
 done
-ls -lh $tagsfile
+ls -lh $tagsfiles
