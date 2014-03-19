@@ -1,7 +1,10 @@
 " vim Initialization
 
-set directory=.,$TMPDIR,$TMP,$TEMP
-set tags=./TAGS,TAGS,/MinGW/TAGS
+set directory=
+set directory+=$TMPDIR
+set directory+=.
+set directory+=$TMP
+set directory+=$TEMP
 
 set path=.,,
 set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++
@@ -13,8 +16,10 @@ set path+=/mingw/lib/gcc/mingw32/4.8.1/include-fixed
 set path+=/mingw/mingw32/include
 set path+=/mingw/msys/1.0/include
 
-"set lines=36
-"set columns=80
+set tags=
+set tags+=./TAGS
+set tags+=TAGS
+set tags+=/MinGW/TAGS
 
 source $HOME/.exrc
 set smarttab

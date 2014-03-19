@@ -1,6 +1,5 @@
 " gvim Initialization -- 2006-10-11 01:33:19UT (cesar@cesar-xp)
 
-set background=light
 set guicursor=a:block
 "set guifont=Terminal\ 14
 set guifont=Consolas:h10:cANSI
@@ -21,6 +20,6 @@ else
 endif
 
 color solarized
-set background=dark
 call togglebg#map("<F12>")
+set background=dark
 "end .gvimrc
