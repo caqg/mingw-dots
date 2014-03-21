@@ -44,8 +44,8 @@ endif
 " C/C++/Java, closer to the Emacs settings
 autocmd FileType c,cpp,java :set cinoptions=:0,j1,J1,l0,g0,t0,(0,)30,N-s
 autocmd FileType c,cpp,java :set foldmethod=syntax
-autocmd FileType c,cpp,java :set foldcolumn=4
-autocmd FileType c,cpp,java :set nofoldenable
+autocmd FileType c,cpp,java :set foldcolumn=6
+autocmd FileType c,cpp,java :set foldenable
 autocmd FileType c,cpp,java :set smarttab
 autocmd FileType c,cpp,java :set expandtab
 autocmd FileType c,cpp,java :set shiftwidth=8
