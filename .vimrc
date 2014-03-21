@@ -23,9 +23,6 @@ set tags+=./TAGS
 set tags+=TAGS
 set tags+=/MinGW/TAGS
 
-set smarttab
-set expandtab
-set textwidth=76
 syntax on
 filetype indent on
 filetype plugin on
@@ -39,6 +36,7 @@ set laststatus=1
 set writebackup
 set nohlsearch
 set incsearch
+set textwidth=76
 if v:version >= 700
   set numberwidth=5
 endif
@@ -48,6 +46,9 @@ autocmd FileType c,cpp,java :set cinoptions=:0,j1,J1,l0,g0,t0,(0,)30,N-s
 autocmd FileType c,cpp,java :set foldmethod=syntax
 autocmd FileType c,cpp,java :set foldcolumn=4
 autocmd FileType c,cpp,java :set nofoldenable
+autocmd FileType c,cpp,java :set smarttab
+autocmd FileType c,cpp,java :set expandtab
+autocmd FileType c,cpp,java :set shiftwidth=8
 
 set ruler
 set diffopt=filler,iwhite
