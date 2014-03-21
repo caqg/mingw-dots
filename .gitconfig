@@ -1,22 +1,26 @@
 [user]
-	name      = Cesar A. Quiroz, Ph.D.
-	email     = cesar_quiroz@ieee.org
+	name            = Cesar A. Quiroz, Ph.D.
+	email           = cesar_quiroz@ieee.org
 [core]
-	autocrlf  = false
-	editor    =  gvim
-	pager     =
-[color]
-	status    = never
-	diff      = never
-	branch    = never
-[alias]
-	ci        = commit
-	co        = checkout
+	editor          = gvim
+	pager           =
 [diff]
-	tool      = gvimdiff
+	tool            = gvimdiff
 [merge]
-	tool      = tortoisegitmerge
+	tool            = tortoisegitmerge
+[color]
+	ui              = auto
+	status          = never
+	diff            = never
+	branch          = never
+[alias]
+	ci              = commit
+	co              = checkout
+	d               = diff
+	ds              = diff --staged
+	l               = log --date=short --pretty=tformat:'%h %ad %s' --no-merges
+	s               = status -bs -uno
 [push]
-	default   = simple
+	default         = simple
 [gui]
 	warndetachedcommit = true
