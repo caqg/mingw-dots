@@ -11,13 +11,7 @@ function -()  { popd "$@"; }
 function =()  { dirs -v "$@"; }
 function j()  { jobs "$@"; }
 function k()  { kill -9 "$@"; }
-function l()  { ls -lhrt "$@"; }
-
-# function withX() { 
-#   cygstart --hide /bin/xinit & 
-#   sleep 5;
-#   exit; 
-# }
+function l()  { ls -Alhrt "$@"; }
 
 [ -x /bin/uname ] && {
     case $(/bin/uname -o) in
@@ -27,5 +21,5 @@ function l()  { ls -lhrt "$@"; }
     esac
 }
 
+# vim: filetype=sh:
 ##end .bash_interactive
-# vim: filetype=sh :
