@@ -278,7 +278,7 @@ ACCENT."
   (interactive)
   (local-set-key "\C-zb" 'latex-bracket-region)
   (local-set-key "\C-ze" 'latex-delimit-environment)
-  (setq *latex-template-dir* (concat emacslib "latex/")))
+  (setq *latex-template-dir* (concat *cq/emacslib* "latex/")))
 
 (defun cq-texinfo-mode ()
   "To edit TeXinfo files"

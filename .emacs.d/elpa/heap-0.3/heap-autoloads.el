@@ -3,7 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads (make-heap) "heap" "heap.el" (21282 42758 0 0))
+;;;### (autoloads (make-heap) "heap" "heap.el" (21319 36397 875888
+;;;;;;  237000))
 ;;; Generated autoloads from heap.el
 
 (autoload 'make-heap "heap" "\
@@ -25,7 +26,7 @@ defaulting to 2.
 
 ;;;***
 
-;;;### (autoloads nil nil ("heap-pkg.el") (21282 42758 861000 0))
+;;;### (autoloads nil nil ("heap-pkg.el") (21319 36397 989585 609000))
 
 ;;;***
 

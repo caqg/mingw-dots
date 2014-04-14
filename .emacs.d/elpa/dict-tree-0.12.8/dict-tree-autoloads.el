@@ -5,7 +5,7 @@
 
 ;;;### (autoloads (read-dict dictree-load dictree-p make-dictree-meta-dict
 ;;;;;;  make-dictree-custom make-dictree) "dict-tree" "dict-tree.el"
-;;;;;;  (21282 42763 0 0))
+;;;;;;  (21319 39994 867981 812000))
 ;;; Generated autoloads from dict-tree.el
 
 (autoload 'make-dictree "dict-tree" "\
@@ -166,8 +166,8 @@ extension, suitable for passing to `load-library'.
 
 ;;;***
 
-;;;### (autoloads nil nil ("dict-tree-pkg.el") (21282 42763 684000
-;;;;;;  0))
+;;;### (autoloads nil nil ("dict-tree-pkg.el") (21319 39994 993634
+;;;;;;  967000))
 
 ;;;***
 

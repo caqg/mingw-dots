@@ -5,7 +5,7 @@
 
 ;;;### (autoloads (ediprolog-localize ediprolog-consult ediprolog-remove-interactions
 ;;;;;;  ediprolog-interact ediprolog-dwim) "ediprolog" "ediprolog.el"
-;;;;;;  (21282 42758 0 0))
+;;;;;;  (21322 14783 355391 360000))
 ;;; Generated autoloads from ediprolog.el
 
 (autoload 'ediprolog-dwim "ediprolog" "\
@@ -62,8 +62,8 @@ this buffer becomes buffer-local.
 
 ;;;***
 
-;;;### (autoloads nil nil ("ediprolog-pkg.el") (21282 42758 92000
-;;;;;;  0))
+;;;### (autoloads nil nil ("ediprolog-pkg.el") (21322 14783 491753
+;;;;;;  943000))
 
 ;;;***
 

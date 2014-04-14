@@ -3,7 +3,7 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "trie" "trie.el" (21282 42761 0 0))
+;;;### (autoloads nil "trie" "trie.el" (21319 39989 595981 675000))
 ;;; Generated autoloads from trie.el
 
 (defalias 'make-trie 'trie--create "\
@@ -132,7 +132,7 @@ functions must *never* bind any variables with names commencing
 
 ;;;***
 
-;;;### (autoloads nil nil ("trie-pkg.el") (21282 42761 793000 0))
+;;;### (autoloads nil nil ("trie-pkg.el") (21319 39989 727167 619000))
 
 ;;;***
 

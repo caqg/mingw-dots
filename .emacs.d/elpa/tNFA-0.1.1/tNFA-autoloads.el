@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (tNFA-regexp-match tNFA-from-regexp) "tNFA" "tNFA.el"
-;;;;;;  (21282 42760 0 0))
+;;;;;;  (21319 39987 31981 609000))
 ;;; Generated autoloads from tNFA.el
 
 (autoload 'tNFA-from-regexp "tNFA" "\
@@ -58,7 +58,7 @@ beginning and end of the regexp to get an unanchored match).
 
 ;;;***
 
-;;;### (autoloads nil nil ("tNFA-pkg.el") (21282 42760 509000 0))
+;;;### (autoloads nil nil ("tNFA-pkg.el") (21319 39987 187014 765000))
 
 ;;;***
 

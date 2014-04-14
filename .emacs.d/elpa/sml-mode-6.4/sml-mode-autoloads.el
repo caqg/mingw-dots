@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (sml-yacc-mode sml-lex-mode sml-cm-mode sml-mode
-;;;;;;  sml-run) "sml-mode" "sml-mode.el" (21282 43171 0 0))
+;;;;;;  sml-run) "sml-mode" "sml-mode.el" (21319 39271 139962 985000))
 ;;; Generated autoloads from sml-mode.el
 
 (defalias 'run-sml 'sml-run)
@@ -55,8 +55,8 @@ Major Mode for editing ML-Yacc files.
 
 ;;;***
 
-;;;### (autoloads nil nil ("sml-mode-pkg.el") (21282 43171 739000
-;;;;;;  0))
+;;;### (autoloads nil nil ("sml-mode-pkg.el") (21319 39271 272514
+;;;;;;  480000))
 
 ;;;***
 
