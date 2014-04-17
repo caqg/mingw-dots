@@ -20,7 +20,6 @@ function j    { jobs "$@"; }
 function k    { kill -9 "$@"; }
 function l    { LC_ALL=C /bin/ls -Alh --time-style=iso "$@"; }
 function lt   { LC_ALL=C /bin/ls -Altrh --time-style=iso "$@"; }
-# function ls   { LC_ALL=C /bin/ls "$@"; }
 function gp   { gview -M -; }
 function vdir { LC_ALL=C /bin/vdir "$@"; }
 

@@ -144,7 +144,7 @@ Goes backward if ARG is negative; error if CHAR not found."
  '(current-language-environment "UTF-8")
  '(cursor-color "#cccccc")
  '(custom-safe-themes (quote ("a53714de04cd4fdb92ed711ae479f6a1d7d5f093880bfd161467c3f589725453" "39dd7106e6387e0c45dfce8ed44351078f6acd29a345d8b22e7b8e54ac25bac4" "cab317d0125d7aab145bc7ee03a1e16804d5abdfa2aa8738198ac30dc5f7b569" "0c311fb22e6197daba9123f43da98f273d2bfaeeaeb653007ad1ee77f0003037" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
- '(default-frame-alist (quote ((width . 93) (height . 43) (menu-bar-lines . 1))))
+ '(default-frame-alist (quote ((width . 96) (height . 43) (menu-bar-lines . 1))))
  '(default-input-method "latin-postfix")
  '(delete-old-versions t)
  '(describe-char-unidata-list (quote (name old-name general-category decomposition mirrored iso-10646-comment)))
