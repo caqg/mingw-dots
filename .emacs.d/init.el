@@ -218,7 +218,7 @@ Goes backward if ARG is negative; error if CHAR not found."
  '(org-startup-indented t)
  '(package-archives (quote (("gnu" . "http://elpa.gnu.org/packages/") ("melpa" . "http://melpa.milkbox.net/packages/") ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(recentf-mode t)
- '(require-final-newline (quote ask))
+ '(require-final-newline nil)
  '(rmail-file-name "~/mail/babyl/RMAIL")
  '(scroll-bar-mode nil)
  '(scroll-conservatively 99)
