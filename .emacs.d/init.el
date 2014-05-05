@@ -155,7 +155,7 @@ Goes backward if ARG is negative; error if CHAR not found."
  '(dired-dwim-target t)
  '(dired-isearch-filenames (quote dwim))
  '(dired-kept-versions 3)
- '(dired-listing-switches "-Alh --time-style=long-iso --group-directories-first")
+ '(dired-listing-switches "-Alh --time-style=long-iso -D")
  '(dired-use-ls-dired t)
  '(dired-x-hands-off-my-keys nil)
  '(display-time-mode t)
