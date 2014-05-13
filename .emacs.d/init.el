@@ -27,6 +27,7 @@ Goes backward if ARG is negative; error if CHAR not found."
        (add-to-list 'auto-mode-alist (cons "bash\\.bashrc$" 'sh-mode))
        (add-to-list 'auto-mode-alist (cons "bash_completion$" 'sh-mode))
 
+       (require 'ert)
        (package-initialize)
        (message "Initialized ELPA packages.")
 
