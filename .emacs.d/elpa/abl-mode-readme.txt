@@ -4,6 +4,7 @@ repetitive tasks --such as running tests or scripts-- in emacs
 shell buffers. Please see README.rst for details.
 
 <<--------- The necessary minor-mode stuff  ---------->>
+(eval-when-compile (require 'cl))
 
 (defvar abl-mode nil
   "Mode variable for abl-mode")
@@ -21,10 +22,10 @@ shell buffers. Please see README.rst for details.
 	  (setq abl-mode-branch-base project-base)
 	  (setq abl-mode-branch (abl-mode-branch-name abl-mode-branch-base))
 	  (setq abl-mode-project-name (abl-mode-get-project-name abl-mode-branch-base))
-	  (setq abl-mode-ve-name (abl-mode-get-vem-name))
 	  (setq abl-mode-shell-name (abl-mode-shell-name-for-branch
 				     abl-mode-project-name
 				     abl-mode-branch))
+	  (setq abl-mode-ve-name (abl-mode-get-ve-name))
 	  (abl-mode-local-options project-base)))))
 
 (defun abl-mode-hook ()
@@ -60,7 +61,7 @@ shell buffers. Please see README.rst for details.
   "The command for activating a virtual environment")
 (make-variable-buffer-local 'abl-mode-ve-create-command)
 
-(defcustom abl-mode-test-command "nosetests -s %s"
+(defcustom abl-mode-test-command "python -m unittest %s"
   "The command for running tests")
 (make-variable-buffer-local 'abl-mode-test-command)
 
@@ -84,10 +85,19 @@ shell buffers. Please see README.rst for details.
 "regexp used to check whether a file is a test file")
 (make-variable-buffer-local 'abl-mode-test-file-regexp)
 
+(defcustom abl-mode-test-path-module-class-separator "."
+"regexp used to check whether a file is a test file")
+(make-variable-buffer-local 'abl-mode-test-path-module-class-separator)
+
 (defcustom abl-mode-code-file-tests-regexps
   '("^\"\"\"[^(\"\"\")]*\\(^tests:\\)" "^'''[^(''')]*\\(^tests:\\)")
 "list of regexps used to search for corresponding test files in a code file")
 (make-variable-buffer-local 'abl-mode-code-file-tests-regexps)
+
+(defcustom abl-mode-end-testrun-re
+  "^OK$\\|^FAILED (failures=[0-9]*)$"
+"Regexp to find out whether the test run has finished.")
+(make-variable-buffer-local 'abl-mode-end-testrun-re)
 
 <<----------------  Here ends the customization -------------->>
 
@@ -115,11 +125,13 @@ shell buffers. Please see README.rst for details.
   "The name of the project. ")
 (make-variable-buffer-local 'abl-mode-project-name)
 
-(defvar abl-mode-last-test-run nil
-  "Last test run and which branch it was")
+(defvar abl-mode-replacement-vems (make-hash-table :test 'equal))
 
-(defvar abl-mode-replacement-vems '())
+(defvar abl-mode-last-shell-points (make-hash-table :test 'equal))
 
+(defvar abl-mode-last-tests-run (make-hash-table :test 'equal))
+
+(defvar abl-mode-last-tests-output (make-hash-table :test 'equal))
 
 (defvar abl-mode-shell-child-cmd
   (if (eq system-type 'darwin)
@@ -131,9 +143,11 @@ shell buffers. Please see README.rst for details.
 <<------------- Helpers  ------------->>
 
 (defun abl-mode-starts-with (str1 str2)
-  (and (> (length str1) 0)
-       (string= str2
-		(substring str1 0 (length str2)))))
+  "Does str1 start with str2?"
+  (if (> (length str1) 0)
+      (string= str2
+	       (substring str1 0 (length str2)))
+    (= (length str2) 0)))
 
 (defun abl-mode-ends-with (str1 str2)
   "Does str1 end with str2?"
@@ -265,12 +279,21 @@ return str"
       (substring git-output (match-beginning 1) (match-end 1)))))
 
 
+(defun abl-mode-get-svn-branch-name (base-dir)
+  (let* ((project-base (locate-dominating-file (abl-mode-concat-paths base-dir) ".svn")))
+    (if (not project-base (error "SVN branch name of non-svn repo could not be found")))
+    (abl-mode-last-path-comp project-base)))
+
+
 (defun abl-mode-branch-name (path)
+  "If svn, name of directory in which .svn resides. If git, git
+branch. If no vcs, "
   (if (string= path "/")
       nil
     (let ((vcs (abl-mode-git-or-svn path)))
-      (cond ((or (not vcs) (string-equal vcs "svn"))
-	     (abl-mode-last-path-comp path))
+      (cond ((not vcs) (abl-mode-last-path-comp path))
+	    ((string-equal vcs "svn")
+	     (abl-mode-get-svn-branch-name path))
 	    ((string-equal vcs "git")
 	     (abl-mode-get-git-branch-name path))
 	    (t nil)))))
@@ -282,17 +305,18 @@ return str"
   (if (string= path "/")
       nil
     (let ((vcs (abl-mode-git-or-svn path)))
-      (cond ((or (not vcs) (string-equal vcs "svn"))
+      (cond ((not vcs) (abl-mode-last-path-comp path))
+	    ((string-equal vcs "svn")
 	     (abl-mode-last-path-comp (abl-mode-higher-dir path)))
 	    ((string-equal vcs "git")
 	     (abl-mode-last-path-comp path))
 	    (t nil)))))
 
-(defun abl-mode-get-vem-name (&optional branch project)
+(defun abl-mode-get-ve-name (&optional branch project)
   (let ((branch-name (or branch abl-mode-branch))
 	(prjct-name (or project abl-mode-project-name)))
     (or
-     (cdr (assoc branch-name abl-mode-replacement-vems))
+     (gethash abl-mode-shell-name abl-mode-replacement-vems nil)
      (concat prjct-name "_"
 	     (replace-regexp-in-string "/" "-" branch-name)))))
 
@@ -302,16 +326,54 @@ return str"
   (concat abl-mode-branch-shell-prefix project-name "_" branch-name))
 
 
-(defun abl-shell-busy ()
+(defun abl-shell-busy (&optional shell-name)
   "Find out whether the shell has any child processes
 running using ps."
-  (let ((abl-shell-buffer (get-buffer abl-mode-shell-name)))
+  (let ((abl-shell-buffer (get-buffer (or shell-name abl-mode-shell-name))))
     (if (not abl-shell-buffer)
 	nil
       (let* ((shell-process-id (process-id (get-buffer-process abl-shell-buffer)))
 	     (command (format abl-mode-shell-child-cmd shell-process-id))
 	     (output (shell-command-to-string command)))
 	(/= (string-to-number output) 0)))))
+
+(defun abl-mode-failed-count (test-output)
+  (if (string-match "FAILED \(failures=\\([0-9]*\\)\)" test-output)
+      (string-to-number (match-string 1 test-output))
+    0))
+
+(defun abl-mode-success-count (test-output failed)
+  (if (string-match "Ran \\([0-9]*\\) test\\(s\\)? in" test-output)
+      (let ((total-test-count (string-to-number (match-string 1 test-output))))
+	(- total-test-count failed))
+    0))
+
+(cl-defstruct
+    (abl-testrun-output
+     (:constructor new-testrun-output
+		   (text &optional (failed (abl-mode-failed-count text))
+			 (successful (abl-mode-success-count text failed)))))
+  text failed successful)
+
+(defun abl-shell-mode-output-filter (line)
+  "If line is the closing line of a test output, copy from the last
+marked point, create a testrun-output struct and put in the hash
+map for latest test run output."
+  (if (string-match abl-mode-end-testrun-re line)
+      (let ((testrun-output
+	     (new-testrun-output (buffer-substring-no-properties
+				  (gethash (buffer-name) abl-mode-last-shell-points)
+				  (point-max)))))
+	(puthash (buffer-name) testrun-output abl-mode-last-tests-output)
+	(message
+	 (concat
+	  "Test run: "
+	  (if (> (abl-testrun-output-failed testrun-output) 0)
+	      (format "FAILED: %d" (abl-testrun-output-failed testrun-output))
+	    "")
+	  (if (> (abl-testrun-output-successful testrun-output) 0)
+	      (format " SUCCESS: %d" (abl-testrun-output-successful testrun-output))
+	    ""))))))
 
 
 (defun abl-mode-exec-command (command)
@@ -340,32 +402,35 @@ running using ps."
       (if open-shell-buffer
 	  (switch-to-buffer open-shell-buffer)
 	(shell shell-name)
+	(add-to-list 'comint-output-filter-functions
+		     'abl-shell-mode-output-filter)
 	(sleep-for 2)))
     (goto-char (point-max))
+    (puthash shell-name (point) abl-mode-last-shell-points)
     (insert (abl-mode-join-string commands " && "))
     (comint-send-input)
     (select-window code-window)))
 
 
-(defun abl-mode-ve-name-or-create (name)
+(defun abl-mode-ve-name-or-create (name &optional is-replacement)
   (if (not abl-mode-check-and-activate-ve)
       (cons nil nil)
-    (let ((replacement-vem (cdr (assoc name abl-mode-replacement-vems))))
-      (if replacement-vem
-	  (cons replacement-vem nil)
-	(let ((vem-path (expand-file-name name abl-mode-ve-base-dir)))
-	  (if (file-exists-p vem-path)
-	      (cons name nil)
-	    (let*
-		((command-string
-		  (format
-		   "No virtualenv %s; y to create it, or name of existing to use instead: "
-		   name))
-		 (vem-or-y (read-from-minibuffer command-string))
-		 (create-new (or (string-equal vem-or-y "y") (string-equal vem-or-y "Y"))))
-	      (if create-new
-		  (cons name create-new)
-		(abl-mode-ve-name-or-create vem-or-y)))))))))
+    (let ((vem-path (expand-file-name name abl-mode-ve-base-dir)))
+      (if (file-exists-p vem-path)
+	  (progn (puthash
+		  abl-mode-shell-name
+		  name
+		  abl-mode-replacement-vems)
+		 (cons name nil))
+	(let* ((command-string
+		(format
+		 "No virtualenv %s; y to create it, or name of existing to use instead: "
+		 name))
+	     (vem-or-y (read-from-minibuffer command-string))
+	     (create-new (or (string-equal vem-or-y "y") (string-equal vem-or-y "Y"))))
+	  (if create-new
+	      (cons name create-new)
+	    (abl-mode-ve-name-or-create vem-or-y 't)))))))
 
 <<------------  Running the server and tests  -------->>
 
@@ -418,19 +483,21 @@ the function above)
 (defun abl-mode-get-test-function-path (file-path)
   (let ((function-name (abl-mode-determine-test-function-name)))
     (if (not (abl-mode-test-in-class))
-	(concat file-path ":" function-name)
+	(concat file-path abl-mode-test-path-module-class-separator function-name)
       (let ((class-name (abl-mode-determine-test-class-name)))
-	(concat file-path ":" class-name "." function-name)))))
+	(concat file-path abl-mode-test-path-module-class-separator class-name "." function-name)))))
 
 
 (defun abl-mode-run-test (test-path &optional branch-name)
   (if (abl-shell-busy)
       (message "The shell is busy; please end the process before running a test")
     (let* ((shell-command (format abl-mode-test-command test-path))
-	   (real-branch-name (or branch-name abl-mode-branch)))
-      (message (format "Running test(s) %s on branch %s" test-path real-branch-name))
+	   (shell-name abl-mode-shell-name))
+      (message (format "Running test(s) %s on %s" test-path shell-name))
       (abl-mode-exec-command shell-command)
-      (setq abl-mode-last-test-run (cons test-path abl-mode-branch)))))
+      (puthash shell-name
+	       test-path
+	       abl-mode-last-tests-run))))
 
 (defun abl-mode-test-for-code-file ()
   "Look for a 'tests: ' header in a python code file. This
@@ -472,12 +539,14 @@ if none of these is true."
 		(save-excursion
 		  (re-search-backward "^class *" nil t))))
 	  (cond
-	 ((not (or test-func-pos test-class-pos))
-	  (error "You are neither in a test class nor a test function."))
-	 ((and test-func-pos
-	       (and test-class-pos (< test-class-pos test-func-pos)))
-	  (abl-mode-get-test-function-path file-path))
-	 (test-class-pos (concat file-path ":" (abl-mode-determine-test-class-name)))))))))
+	   ((not (or test-func-pos test-class-pos))
+	    (error "You are neither in a test class nor a test function."))
+	   ((and test-func-pos
+		 (and test-class-pos (< test-class-pos test-func-pos)))
+	    (abl-mode-get-test-function-path file-path))
+	   (test-class-pos (concat file-path
+				   abl-mode-test-path-module-class-separator
+				   (abl-mode-determine-test-class-name)))))))))
 
 
 (defun abl-mode-run-test-at-point ()
@@ -487,9 +556,10 @@ if none of these is true."
 
 (defun abl-mode-rerun-last-test ()
   (interactive)
-  (if (not abl-mode-last-test-run)
-      (message "You haven't run any tests yet.")
-    (abl-mode-run-test (car abl-mode-last-test-run) (cdr abl-mode-last-test-run))))
+  (let ((last-run (gethash abl-mode-shell-name abl-mode-last-tests-run)))
+    (if (not last-run)
+	(message "You haven't run any tests yet.")
+      (abl-mode-run-test last-run))))
 
 
 (defun abl-mode-parse-python-path (python-path)
@@ -534,7 +604,6 @@ opens the package and navigates to the method."
 	  (goto-char (point-min))
 	  (if class-name (search-forward (concat "class " class-name)))
 	  (if func-name (search-forward (concat "def " func-name))))))))
-
 
 (defun abl-mode-start-python ()
   (interactive)
@@ -597,12 +666,11 @@ Sample custom command
 
 <<------------  TODOS -------------->>
 
-- parse output, list failed tests
-- go to a/next test that failed
-- rerun last failed
+- open import (should also work on classes in code and libs)
 - import something from one of the open files (or repeat existing import)
      - when abl-mode is initialized on a file, find the imports, add to list if new
      - add command to insert an import
 - change abl-mode init to work also with files not inside the git dir (opened modules)
+- moving back to shell window if it has a pdb?
 
 abl-mode.el ends here
