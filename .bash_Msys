@@ -8,8 +8,6 @@ function view()       { vim  -Rp  "$@"; }
 function viewdiff()   { vim  -Rd  "$@"; }
 function vimdiff()    { vim  -d   "$@"; }
 
-function m()          { make "$@" 2>&1 | tee make.info; }
-
 alias gp='gvim -RM -&'
 
 # vim: set filetype=sh :
