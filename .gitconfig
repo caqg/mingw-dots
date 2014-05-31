@@ -2,7 +2,7 @@
 	name            = Cesar A. Quiroz, Ph.D.
 	email           = cesar_quiroz@ieee.org
 [core]
-	editor          = gvim
+	editor          = gvim -f
 	pager           =
 [diff]
 	tool            = gvimdiff
