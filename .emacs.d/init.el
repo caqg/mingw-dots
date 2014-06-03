@@ -226,7 +226,7 @@ Goes backward if ARG is negative; error if CHAR not found."
  '(scroll-bar-mode nil)
  '(scroll-conservatively 99)
  '(search-slow-window-lines 3)
- '(semantic-default-submodes (quote (global-semantic-highlight-func-mode global-semantic-stickyfunc-mode global-semantic-idle-completions-mode global-semantic-idle-scheduler-mode global-semanticdb-minor-mode global-semantic-idle-summary-mode global-semantic-mru-bookmark-mode)))
+ '(semantic-default-submodes (quote (global-semantic-highlight-func-mode global-semantic-idle-completions-mode global-semantic-idle-scheduler-mode global-semanticdb-minor-mode global-semantic-idle-summary-mode global-semantic-mru-bookmark-mode)))
  '(semantic-mode t)
  '(set-mark-command-repeat-pop t)
  '(shell-popd-regexp "popd\\|-")
