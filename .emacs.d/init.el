@@ -93,6 +93,18 @@ Goes backward if ARG is negative; error if CHAR not found."
        (require 'parenface)
        (require 'linum)
 
+       ;; tabbar (already initialized)
+       (defadvice tabbar-add-tab (after cq/tabbar-add-tab-sorted
+                                        (tabset object &optional append))
+         "Present the tab bar tab sets in ascending order by buffer name."
+         (let* ((tabs (tabbar-tabs tabset))
+                (sorted (sort tabs #'(lambda (a b)
+                                       (string< (buffer-name (car a))
+                                                (buffer-name (car b)))))))
+           ;; (message "sorted-->%s" sorted)
+           (set tabset sorted)))
+       (ad-activate 'tabbar-add-tab 'compile-it)
+
        (cond ((>= emacs-major-version 23)
               (require 'emacs23-theme-init)
               (set-color-theme-solarized-light)
