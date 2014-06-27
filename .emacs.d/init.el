@@ -27,6 +27,7 @@ Goes backward if ARG is negative; error if CHAR not found."
        (add-to-list 'auto-mode-alist (cons "bash\\.bashrc$" 'sh-mode))
        (add-to-list 'auto-mode-alist (cons "bash_completion$" 'sh-mode))
 
+       (require 'speedbar)
        (require 'ert)
        (package-initialize)
        (message "Initialized ELPA packages.")
@@ -63,12 +64,14 @@ Goes backward if ARG is negative; error if CHAR not found."
        (global-set-key "\C-cl" 'org-store-link)
        (global-set-key "\C-ca" 'org-agenda)
        (global-set-key "\C-cb" 'org-iswitchb)
+       (global-set-key "\C-cc" 'org-capture)
        (setq org-todo-keywords
              '((sequence "TODO" "DOING" "PENDING" "|" "DONE" "DROPPED")))
        (setq org-log-done t)            ; or '(done) instead of t
        (setq org-agenda-include-diary t)
        (add-hook 'org-mode-hook #'(lambda () (require 'vc)))
        (add-hook 'org-mode-hook 'turn-on-font-lock)
+       (add-hook 'org-mode-hook 'turn-off-filladapt-mode)
 
        (require 'remember)
        (require 'org-remember)
@@ -118,6 +121,7 @@ Goes backward if ARG is negative; error if CHAR not found."
               ))
        ))
 
+(setq-default ediff-auto-refine nil)
 (global-set-key [(meta z)] 'zap-up-to-char)
 (global-set-key [(meta Z)] 'zap-to-char)
 
@@ -164,6 +168,7 @@ Goes backward if ARG is negative; error if CHAR not found."
  '(describe-char-unidata-list (quote (name old-name general-category decomposition mirrored iso-10646-comment)))
  '(develock-auto-enable nil)
  '(diary-file "~/.diary")
+ '(diff-command "c:/MinGW/msys/1.0/bin/diff")
  '(diff-switches "-du")
  '(dired-auto-revert-buffer t)
  '(dired-dwim-target t)
@@ -173,6 +178,7 @@ Goes backward if ARG is negative; error if CHAR not found."
  '(dired-use-ls-dired t)
  '(dired-x-hands-off-my-keys nil)
  '(display-time-mode t)
+ '(ecb-activation-selects-ecb-frame-if-already-active t)
  '(ecb-auto-expand-tag-tree (quote all))
  '(ecb-compile-window-height 8)
  '(ecb-compile-window-width (quote edit-window))
@@ -219,6 +225,7 @@ Goes backward if ARG is negative; error if CHAR not found."
  '(indicate-buffer-boundaries (quote left))
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
+ '(iswitchb-mode t)
  '(line-move-visual nil)
  '(list-directory-brief-switches "-ACF")
  '(list-directory-verbose-switches "-lgaF --time-style=long-iso")
