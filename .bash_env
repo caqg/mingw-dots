@@ -10,6 +10,7 @@ $HOME/cmd\
 :/c/Python34\
 :/c/Python34/Scripts\
 :/c/Python34/Tools/Scripts\
+:/c/Ruby193/bin\
 :/c/MinGW/bin\
 :/c/MinGW/mingw32/bin\
 :/c/MinGW/msys/1.0/bin\
