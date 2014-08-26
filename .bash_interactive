@@ -13,15 +13,16 @@ shopt -s cdspell
 function +    { pushd "$@"; }
 function -    { popd "$@"; }
 function =    { dirs -v "$@"; }
+function 2top { cd $(git rev-parse --show-toplevel); }
+
 function dir  { LC_ALL=C /bin/dir -F "$@"; }
-function gtop { cd $(git rev-parse --show-toplevel); }
 function h    { history "$@"; }
 function hf   { if [ $# -gt 0 ]; then history | grep -e "$*" -; else history; fi; }
 function j    { jobs "$@"; }
 function k    { kill -9 "$@"; }
 function l    { LC_ALL=C /bin/ls -Alh --time-style=iso "$@"; }
 function lt   { LC_ALL=C /bin/ls -Altrh --time-style=iso "$@"; }
-function gp   { gview -M -; }
+function v    { gview -M -; }
 function vdir { LC_ALL=C /bin/vdir "$@"; }
 
 [ -x /bin/uname ] && {
