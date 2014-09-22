@@ -6,4 +6,4 @@ case $# in
 esac
 
 # e -c -F '((fullscreen . maximized))' -e '(ediff-files "'"$A"'" "'"$B"'")'
-e -c -e '(ediff-files "'"$A"'" "'"$B"'")'
+e -c -F '((width . 180)(height . 48))' -e '(ediff-files "'"$A"'" "'"$B"'")'

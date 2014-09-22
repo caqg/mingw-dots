@@ -8,5 +8,5 @@ case $# in
 esac
 
 #e -c -F '((fullscreen . maximized))' -e \
-e -c -e \
+e -c -F '((width . 180)(height . 48))' -e \
  '(ediff-merge-files-with-ancestor "'"$C"'" "'"$B"'" "'"$A"'" () "'"$M"'")'
