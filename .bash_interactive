@@ -24,6 +24,7 @@ function l    { LC_ALL=C /bin/ls -Alh --time-style=iso "$@"; }
 function lt   { LC_ALL=C /bin/ls -Altrh --time-style=iso "$@"; }
 function v    { gvim -MR -; }
 function vdir { LC_ALL=C /bin/vdir "$@"; }
+function vf   { ~/cmd/e -nc "$@"; }
 
 [ -x /bin/uname ] && {
     case $(/bin/uname -o) in
