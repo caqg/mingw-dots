@@ -48,7 +48,7 @@
 [gui]
         warndetachedcommit = true
 
-[credential]
-        helper          = cache --timeout=14400
+# [credential]
+#         helper          = cache --timeout=14400
 
 ## end .gitconfig
