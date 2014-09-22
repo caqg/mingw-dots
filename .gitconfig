@@ -1,34 +1,54 @@
 [user]
-	name                    = Cesar A. Quiroz, Ph.D.
-	email                   = cesar_quiroz@ieee.org
+        name            = Cesar A. Quiroz, Ph.D.
+        email           = cesar_quiroz@ieee.org
 
 [core]
-	editor                  = gvim -f
-	pager                   =
+        editor          = $HOME/cmd/e -c -F '((width . 80)(height . 24))'
+        pager           =
 
 [diff]
-	tool                    = $HOME/cmd/ediff
+        tool            = ediff
+
+[difftool "ediff"]
+        cmd             = $HOME/cmd/ediff $LOCAL $REMOTE
 
 [merge]
-	tool                    = $HOME/cmd/emerge
+        tool            = emerge
+        conflictstyle   = diff3
+
+[mergetool "emerge"]
+        cmd             = $HOME/cmd/emerge $BASE $REMOTE $LOCAL $MERGED
 
 [alias]
-	aa                      = add -A .
-	au                      = add -u .
-	ci                      = commit
-	co                      = checkout
-	d                       = diff
-	ds                      = diff --staged
-	l                       = log --date=short --pretty=tformat:'%h %ad %s' --no-merges
-	prefix                  = rev-parse --show-prefix
-	s                       = status -bs -uall .
-	top                     = rev-parse --show-toplevel
+        aa              = add -A .
+        au              = add -u .
+        ci              = commit
+        co              = checkout
+        d               = diff
+	di              = diff
+        ds              = diff --staged
+        l               = log --date=short --pretty=tformat:'%h %ad %s' --no-merges
+        prefix          = rev-parse --show-prefix
+        s               = status -bs -uall .
+        top             = rev-parse --show-toplevel
 
 [push]
-	default                 = simple
+        default         = simple
 
 [color]
-	ui                      = true
+        branch          = true
+        diff            = true
+        grep            = true
+        interactive     = true
+        pager           = true
+        showbranch      = true
+        status          = true
+        ui              = true
 
 [gui]
-	warndetachedcommit      = true
+        warndetachedcommit = true
+
+[credential]
+        helper          = cache --timeout=14400
+
+## end .gitconfig
