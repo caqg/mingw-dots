@@ -46,7 +46,7 @@ export PERL5LIB
 export CVSROOT=:local:$HOME/src/cvsroot
 
 export PAGER=less
-export LESS=cq
+export LESS=isrRQ
 export EDITOR=$HOME/cmd/e
 export VISUAL=$HOME/cmd/e
 
