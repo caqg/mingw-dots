@@ -10,4 +10,4 @@ REM
 REM Target      %HOME%\msys-emacs.bat
 REM Start in    %HOME%
 REM Run         Minimized
-C:/MinGW/msys/1.0/bin/bash -l -c 'exec /c/Program\ Files\ \(x86\)/Emacs/emacs-24.3/bin/runemacs.exe -f set-color-theme-solarized-dark'
+C:/MinGW/msys/1.0/bin/bash -l -c 'exec /c/Program\ Files\ \(x86\)/Emacs/emacs-24.3/bin/runemacs.exe -geometry -0+0 -f server-start -f set-color-theme-solarized-dark'
