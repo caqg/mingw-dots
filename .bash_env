@@ -3,25 +3,25 @@
 export PATH="\
 $HOME/cmd\
 :$HOME/bin\
+:/c/MinGW/bin\
+:/c/MinGW/mingw32/bin\
+:/c/MinGW/msys/1.0/bin\
 :/c/Program Files (x86)/Vim/vim74\
 :/c/Program Files (x86)/Emacs/emacs-24.3/bin\
 :/c/Program Files (x86)/clisp-2.49\
 :/c/Program Files/swipl/bin\
+:/c/Program Files (x86)/Git/bin\
+:/c/Program Files (x86)/WinMerge\
 :/c/Python34\
 :/c/Python34/Scripts\
 :/c/Python34/Tools/Scripts\
 :/c/Ruby193/bin\
-:/c/MinGW/bin\
-:/c/MinGW/mingw32/bin\
-:/c/MinGW/msys/1.0/bin\
-:/c/Program Files (x86)/Git/bin\
 :/c/Windows/system32\
 :/c/Windows\
 :/c/Windows/System32/Wbem\
 :/c/Windows/System32/WindowsPowerShell/v1.0/\
 :/c/Program Files/TortoiseGit/bin\
 :/c/Program Files/TortoiseSVN/bin\
-:/c/Program Files (x86)/WinMerge\
 :.\
 "
 
