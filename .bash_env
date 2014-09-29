@@ -25,13 +25,14 @@ $HOME/cmd\
 :.\
 "
 
-export MANPATH="\
-$HOME/share/man\
-:/c/MinGw/msys/1.0/share/man\
-:/c/MinGw/share/doc/mingwrt/historical/man\
-:/c/MinGw/share/doc/w32api/historical/man\
-:/c/MinGw/share/man\
-"
+# This setting interacts poorly with Emacs 24.3.  Unsetting it allows Emacs to
+# find man pages!
+#
+# export MANPATH="\
+# $HOME/share/man\
+# :/c/MinGw/msys/1.0/share/man\
+# :/c/MinGw/share/man\
+# "
 
 export INFOPATH="\
 $HOME/share/info\
