@@ -2,7 +2,7 @@
 TMPDIR=${TMPDIR:-/tmp}
 # PATH=/usr/bin:/bin
 
-xterm=xterm
+xterm=rxvt
 geometry=${xGEOMETRY:-80x40}
 pager=${PAGER:-less}
 temporary=${TMPDIR}/x.tmp.$$
@@ -26,10 +26,13 @@ case $# in
 *)	title="@$where  $name $2 $3 $4 $5 ..."	;;
 esac
 
-fn=$(whichXFont font)
-fb=$(whichXFont boldFont)
+# fn=$(whichXFont font)
+# fb=$(whichXFont boldFont)
+fn=9x15
+fb=9x15b
 
 (${xterm} -fn "$fn" -fb "$fb" \
+    -fg gray75 -bg gray10 \
     -geometry ${geometry} +sb -n "$title" -T "$title" -e ${temporary} &&
  ${rm} -f ${temporary}) &
 

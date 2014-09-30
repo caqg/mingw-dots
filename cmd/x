@@ -1,5 +1,6 @@
 #!/bin/sh
 
+xterm=rxvt
 dispatch=${xDISPATCH:-"$HOME/.x-dispatch"}
 iconic=
 
@@ -42,25 +43,26 @@ case $# in
 *)	title="@$where  $name $1 $2 $3 $4 $5 $6 ..."	;;
 esac
 
-fn=$(whichXFont font)
-case x"$fn" in
-    x) fnopt="" ;;
-    *) fnopt="-fn \"$fn\"" ;;
-esac
+# fn=$(whichXFont font)
+# case x"$fn" in
+#     x) fnopt="" ;;
+#     *) fnopt="-fn \"$fn\"" ;;
+# esac
 
-fb=$(whichXFont boldFont)
-case x"$fb" in
-    x) fbopt="";;
-    *) fbopt="-fb \"$fb\"";;
-esac
+# fb=$(whichXFont boldFont)
+# case x"$fb" in
+#     x) fbopt="";;
+#     *) fbopt="-fb \"$fb\"";;
+# esac
 
-exec xterm \
+exec "$xterm" \
   $scrollbar \
+  -geometry 82x40 \
+  -fg gray75 -bg gray5 \
+  -fn 9x15 -fb 9x15b \
   -name $name \
-  -xrm '*iconName: '"$title" \
-    $fnopt \
-    $fbopt \
-  -title "$title" \
+  -n "$title" \
+  -T "$title" \
   $iconic\
   -e $cmd "$@" &
 
