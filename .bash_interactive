@@ -4,7 +4,18 @@ export PS1='$ ';
 export PS3='? ';
 case "$TERM" in
 xterm*|rxvt*|cygwin)
-    PS1='\[\e]0;\u@\h: \w\a\]'"$PS1";;
+    PS1='\[\e]0;\u@\h: \w\a\]'"$PS1"
+
+    # Too slow in MinGW
+    function updatePS1WithGitBranch {
+        left='\[\e]0;\u@\h: \w'
+        middle=$(git branch 2>/dev/null | sed -e '/^ /d' -e 's/^..\(.*\)/ git:\1/')
+        right='\a\]\$ '
+        PS1="$left$middle$right"
+    }
+
+    # PROMPT_COMMAND=updatePS1WithGitBranch
+    ;;
 esac
 
 set -o ignoreeof
@@ -13,6 +24,7 @@ shopt -s cdspell
 function +    { pushd "$@"; }
 function -    { popd "$@"; }
 function =    { dirs -v "$@"; }
+
 function 2top { cd $(git rev-parse --show-toplevel); }
 
 function dir  { LC_ALL=C /bin/dir -F "$@"; }
