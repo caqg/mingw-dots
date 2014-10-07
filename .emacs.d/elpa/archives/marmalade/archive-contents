@@ -1,4 +1,7 @@
 (1
+ (garoon .
+	 [(0 0 1)
+	  nil "A Garoon client." single])
  (zone-matrix .
 	      [(0 0 1)
 	       nil "Matrix themed Zone mode" tar])
@@ -2548,7 +2551,7 @@
 	   [(1 6)
 	    nil "goto last change" single])
  (google-translate .
-		   [(0 10 2)
+		   [(0 10 4)
 		    nil "Emacs interface to Google Translate." tar])
  (god-mode .
 	   [(2 12 0)
