@@ -5,9 +5,11 @@ Quickstart:
 
     Install these fonts
 
-        http://users.teilar.gr/~g1951d/Symbola706.zip
-        http://www.quivira-font.com/files/Quivira.ttf
-        http://sourceforge.net/projects/dejavu/files/dejavu/2.33/dejavu-fonts-ttf-2.33.tar.bz2
+        http://users.teilar.gr/~g1951d/Symbola.zip
+        http://www.quivira-font.com/files/Quivira.ttf   ; or Quivira.otf
+        http://sourceforge.net/projects/dejavu/files/dejavu/2.34/dejavu-fonts-ttf-2.34.tar.bz2
+        http://noto.googlecode.com/git/fonts/individual/hinted/NotoSans-Regular.ttc
+        http://noto.googlecode.com/git/fonts/individual/unhinted/NotoSansSymbols-Regular.ttf
 
     Remove Unifont from your system.
 
@@ -43,8 +45,10 @@ mappings from
 
 and makes the settings available via the customization interface.
 
-This library provides font mappings for 205 of the 216 blocks in
-the Unicode 6.3 standard with displayable characters.
+This library provides font mappings for 215 of the 245 blocks in
+the Unicode 7.0 standard which are public and have displayable
+characters.  It assumes that 6 Latin blocks are covered by the
+default font.  24/245 blocks are not mapped to any known font.
 
 To use unicode-fonts, place the unicode-fonts.el file somewhere
 Emacs can find it, and add the following to your ~/.emacs file:
@@ -81,26 +85,30 @@ Consolas, or DejaVu Sans Mono is already being used for the default
 face, no separate mappings are provided for the following Unicode
 blocks:
 
+    Basic Latin
     Latin Extended Additional
     Latin Extended-A
+    Latin Extended-B
     Latin-1 Supplement
     Spacing Modifier Letters
+
+though some of these remain configurable via `customize'.
 
 It is also recommended to remove GNU Unifont from your system.
 Unifont is very useful for debugging, but not useful for reading.
 
 The default options favor correctness and completeness over speed,
-and can add many seconds to startup time in GUI mode.  Note that
-when possible a font cache is kept between sessions, so try
-starting Emacs a second time to see the true startup cost.  To
-further increase startup speed, enter the customization interface
-and
+and can add many seconds to initial startup time in GUI mode.
+However, when possible a font cache is kept between sessions.  If
+you have persistent-soft.el installed, when you start Emacs the
+second time, the startup cost should be negligible.
 
-    1. Remove fonts from `unicode-fonts-block-font-mapping'
-       which are not present on your system.
-
-    2. Disable blocks in `unicode-fonts-block-font-mapping'
-       which you are not interested in displaying.
+The disk cache will be rebuilt during Emacs startup whenever a font
+is added or removed, or any relevant configuration variables are
+changed.  To increase the speed of occasionally building the disk
+cache, you may use the customization interface to remove fonts from
+`unicode-fonts-block-font-mapping' which are not present on your
+system.
 
 If you are using a language written in Chinese or Arabic script,
 try customizing `unicode-fonts-skip-font-groups' to control which
@@ -119,12 +127,26 @@ See Also
 
 Notes
 
-Free fonts recognized by this package may be downloaded
-from the following locations:
+Free fonts recognized by this package may be downloaded from the
+following locations.  For any language, it is increasingly likely
+that Noto Sans provides coverage:
 
-    From http://scripts.sil.org/cms/scripts/page.php?item_id=DoulosSIL_download
+    From http://www.google.com/get/noto/
 
-        Doulos SIL                    ; Extended European and diacritics
+        Noto Sans and friends         ; 178 Unicode blocks and counting; sole
+                                      ; source for these blocks:
+                                      ;
+                                      ;   Bamum / Bamum Supplement / Kaithi
+                                      ;   Mandaic / Meetei Mayek Extensions
+                                      ;   Sundanese Supplement
+                                      ;
+                                      ; Also a good source for recently-added
+                                      ; glyphs such as "Turkish Lira Sign".
+
+    From http://scripts.sil.org/cms/scripts/page.php?item_id=CharisSIL_download
+      or http://scripts.sil.org/cms/scripts/page.php?item_id=DoulosSIL_download
+
+        Charis SIL or Doulos SIL      ; Extended European and diacritics
 
     From http://scripts.sil.org/cms/scripts/page.php?item_id=Gentium_download
 
@@ -135,12 +157,17 @@ from the following locations:
         Aegean, Aegyptus, Akkadian    ; Ancient languages
         Analecta                      ; Ancient languages, Deseret
         Musica                        ; Musical Symbols
+        Nilus                         ; Ancient languages
 
     From http://www.wazu.jp/gallery/views/View_MPH2BDamase.html
 
         MPH 2B Damase                 ; Arabic, Armenian, Buginese, Cherokee, Georgian,
                                       ; Glagolitic, Hanunoo, Kharoshthi, Limbu, Osmanya,
                                       ; Shavian, Syloti Nagri, Tai Le, Thaana
+
+    From http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=NamdhinggoSIL
+
+        Namdhinggo SIL                ; Limbu
 
     From http://wenq.org/wqy2/index.cgi?FontGuide
 
@@ -150,6 +177,11 @@ from the following locations:
 
         BabelStone Han                ; CJK (Simplified Chinese)
         BabelStone Phags-pa Book      ; Phags-pa
+        BabelStone Modern             ; Tags / Specials / Selectors
+
+    From http://vietunicode.sourceforge.net/fonts/fonts_hannom.html
+
+        HAN NOM A, HAN NOM B          ; CJK (Nôm Chinese)
 
     From http://kldp.net/projects/unfonts/
 
@@ -170,6 +202,10 @@ from the following locations:
     From http://www.library.gov.bt/IT/fonts.html
 
         Jomolhari                     ; Tibetan
+
+    From http://www.thlib.org/tools/scripts/wiki/tibetan%20machine%20uni.html
+
+        Tibetan Machine Uni           ; Tibetan
 
     From http://scripts.sil.org/cms/scripts/page.php?item_id=Padauk
 
@@ -239,9 +275,13 @@ from the following locations:
 
         Sundanese Unicode             ; Sundanese
 
+    From http://www.amirifont.org/
+
+        Amiri                         ; Arabic (Naskh)
+
     From http://scripts.sil.org/cms/scripts/page.php?item_id=Scheherazade
 
-        Scheherazade                  ; Arabic
+        Scheherazade                  ; Arabic (Naskh)
 
     From http://www.farsiweb.ir/wiki/Persian_fonts
 
@@ -271,10 +311,6 @@ from the following locations:
 
         Adinatha Tamil Brahmi         ; Brahmi
 
-    From https://code.google.com/p/noto/
-
-        Noto Sans                     ; Turkish Lira Sign (and others)
-
     From http://ftp.gnu.org/gnu/freefont/
 
         FreeMono, etc (FreeFont)      ; Kayah Li (and others)
@@ -287,9 +323,13 @@ from the following locations:
 
         Mingzat                       ; Lepcha
 
-    From http://phjamr.github.io/miao.html#install
+    From http://phjamr.github.io/lisu.html#install
+         http://phjamr.github.io/miao.html#install
+         http://phjamr.github.io/mro.html#install
 
-        Miao Unicode                  ; Miao, Lisu
+        Miao Unicode                  ; Miao
+        Lisu Unicode                  ; Lisu
+        Mro Unicode                   ; Mro
 
     From http://scholarsfonts.net/cardofnt.html
 
@@ -298,6 +338,35 @@ from the following locations:
     From http://sourceforge.net/projects/junicode/files/junicode/
 
         Junicode                      ; Historical Languages
+
+    From http://www.evertype.com/fonts/vai/
+
+        Dukor                         ; Vai
+
+    From http://sourceforge.net/projects/zhmono/
+
+        ZH Mono                       ; Inscriptional Pahlavi / Parthian
+
+    From http://culmus.sourceforge.net/ancient/index.html
+
+        Aramaic Imperial Yeb          ; Imperial Aramaic
+
+    From http://www.languagegeek.com/font/fontdownload.html
+
+        Aboriginal Sans               ; Aboriginal Languages
+        Aboriginal Serif
+
+    From http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=EzraSIL_Home
+
+        Ezra SIL                      ; Hebrew
+
+    From http://www.evertype.com/fonts/coptic/
+
+        Antinoou                      ; Coptic / General Punctuation
+
+    From http://apagreekkeys.org/NAUdownload.html
+
+        New Athena Unicode            ; Ancient Languages / Symbols
 
 Compatibility and Requirements
 
@@ -312,6 +381,12 @@ Bugs
 
     The default choice of font for each code block balances coverage
     versus appearance.  This is necessarily subjective.
+
+    Unicode also defines the notion of a "script" as a higher-level
+    abstraction which is independent of "blocks".  Modern fonts can
+    report their script coverage, and Emacs may also access that
+    information.  However, this library ignores scripts in favor
+    of blocks and glyphs.
 
     Checking for font availability is slow.  This library can
     add anywhere between 0.1 - 10 secs to startup time.  It is
@@ -349,7 +424,30 @@ Bugs
 
 TODO
 
+    provide additional interfaces
+    - dump set-fontset-font instructions
+    - immediately set font for character/current-character/range
+    - recommend font for current character
+    - alternatives to customize, which can be called before unicode-fonts-setup
+      - eg "prefer this font for this block"
+      - also character/range ie overrides
+
+    scripts vs blocks
+    - further doc note
+    - provide alternative interface via scripts
+
+    reorg font list by language?
+    - break down into living/dead/invented
+
+    support MUFI for PUA
+
+    support ConScript for PUA
+
+    Aramaic as a style of Hebrew
+
     (set-language-environment "UTF-8") ?
+
+    Include all Windows 8 fonts
 
     Remove very old Microsoft entries (eg Monotype.com which was
     renamed Andale)
@@ -363,8 +461,6 @@ TODO
     complete.
 
     Note all decorative fonts
-
-    Get Windows 8 font listing
 
     Adobe international fonts which are supplied with Reader
 
