@@ -9,19 +9,19 @@ set directory+=$TMP
 set directory+=$TEMP
 
 set path=.,,
-set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++
-set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++/mingw32
-set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++/backward
-set path+=/mingw/lib/gcc/mingw32/4.8.1/include
-set path+=/mingw/include
-set path+=/mingw/lib/gcc/mingw32/4.8.1/include-fixed
-set path+=/mingw/mingw32/include
-set path+=/mingw/msys/1.0/include
+" set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++
+" set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++/mingw32
+" set path+=/mingw/lib/gcc/mingw32/4.8.1/include/c++/backward
+" set path+=/mingw/lib/gcc/mingw32/4.8.1/include
+" set path+=/mingw/include
+" set path+=/mingw/lib/gcc/mingw32/4.8.1/include-fixed
+" set path+=/mingw/mingw32/include
+" set path+=/mingw/msys/1.0/include
 
 set tags=
 set tags+=./TAGS
 set tags+=TAGS
-set tags+=/MinGW/TAGS
+" set tags+=/MinGW/TAGS
 
 syntax on
 filetype indent on
@@ -45,8 +45,8 @@ endif
 autocmd FileType c,cpp,java :set cinoptions=:0,j1,J1,l0,g0,t0,(0,)30,N-s
 autocmd FileType c,cpp,java :set expandtab
 autocmd FileType c,cpp,java :set foldmethod=syntax
-autocmd FileType c,cpp,java :set foldcolumn=6
-autocmd FileType c,cpp,java :set foldenable
+autocmd FileType c,cpp,java :set foldcolumn=0
+autocmd FileType c,cpp,java :set nofoldenable
 autocmd FileType c,cpp,java :set formatoptions+=cj
 autocmd FileType c,cpp,java :set shiftwidth=8
 autocmd FileType c,cpp,java :set smarttab
